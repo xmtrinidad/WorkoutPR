@@ -29,13 +29,23 @@
         <!-- /Record Actions -->
         <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
+            <h4 class="modal-title">{{exercise.name}}</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>One fine body&hellip;</p>
+            <form (submit)="onNewRecordSubmit(exercise); c('Close click')">
+              <div class="form-group">
+                <label for="user_reps_{{i}}">Reps</label>
+                <input [(ngModel)]="newReps" name="new_reps" class="form-control" id="user_reps_{{i}}">
+              </div>
+              <div class="form-group">
+                <label for="user_max_{{i}}">Max</label>
+                <input [(ngModel)]="newMax" name="new_max" class="form-control" id="user_max_{{i}}">
+              </div>
+              <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>

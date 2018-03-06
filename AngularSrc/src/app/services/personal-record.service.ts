@@ -35,4 +35,15 @@ export class PersonalRecordService {
     this.isEdit = false;
   }
 
+  updatePr(updated, pr) {
+    PERSONAL_RECORDS.forEach((muscleGroup, i) => {
+      muscleGroup.exercises.find((exercise) => {
+        if (exercise.name === updated.name) {
+          exercise.prs.unshift(pr);
+          return true;
+        }
+      });
+    });
+  }
+
 }

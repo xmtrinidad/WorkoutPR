@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MuscleGroup} from "../../models/MuscleGroup";
 import {PersonalRecordService} from "../../services/personal-record.service";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {PersonalRecord} from "../../models/PersonalRecord";
 
 @Component({
   selector: 'app-personal-records',
@@ -15,6 +16,8 @@ export class PersonalRecordsComponent implements OnInit {
   selectedMuscleGroup: MuscleGroup;
   selectedExercise: number;
   isDesktop: boolean;
+  newReps: number;
+  newMax: number;
 
   constructor(
     private modalService: NgbModal,
@@ -46,6 +49,14 @@ export class PersonalRecordsComponent implements OnInit {
 
   onExerciseUpdate(content) {
     this.modalService.open(content);
+  }
+
+  onNewRecordSubmit(exercise) {
+    const pr: PersonalRecord = {
+      reps: this.newReps,
+      max: this.newMax
+    };
+    this.prService.updatePr(exercise, pr);
   }
 
   /**
