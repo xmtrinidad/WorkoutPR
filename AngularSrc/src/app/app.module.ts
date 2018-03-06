@@ -12,10 +12,16 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 import {ValidateService} from "./services/validate.service";
 import { AlertComponent } from './components/alert/alert.component';
 import { AuthService } from './services/auth.service';
+import {PersonalRecordService} from "./services/personal-record.service";
+import { JumbotronComponent } from './components/landing/jumbotron/jumbotron.component';
+import { MuscleGroupDropdownComponent } from './components/muscle-group-dropdown/muscle-group-dropdown.component';
+import { PersonalRecordsComponent } from './components/personal-records/personal-records.component';
+
 
 
 @NgModule({
@@ -26,7 +32,11 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    AlertComponent
+    AlertComponent,
+    LandingComponent,
+    JumbotronComponent,
+    MuscleGroupDropdownComponent,
+    PersonalRecordsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +45,7 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, PersonalRecordService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
