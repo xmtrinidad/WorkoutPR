@@ -1,0 +1,15 @@
+<form class="container" (submit)="onExerciseEditSubmit()">
+  <div *ngFor="let pr of exercise.prs; let i = index;" class="row">
+    <div class="form-group col-6">
+      <label for="user_reps">Reps</label>
+      <input name="reps__{{i}}" [(ngModel)]="pr.reps"  type="text" id="user_reps" class="form-control">
+    </div>
+    <div class="form-group col-6">
+      <label for="user_max">Max</label>
+      <input name="max__{{i}}" [(ngModel)]="pr.max" type="text" id="user_max" class="form-control">
+    </div>
+  </div>
+  <div class="text-center my-3">
+    <input type="submit" value="Save" class="btn btn-primary">
+  </div>
+</form>

@@ -21,6 +21,8 @@ import {PersonalRecordService} from "./services/personal-record.service";
 import { JumbotronComponent } from './components/landing/jumbotron/jumbotron.component';
 import { MuscleGroupDropdownComponent } from './components/muscle-group-dropdown/muscle-group-dropdown.component';
 import { PersonalRecordsComponent } from './components/personal-records/personal-records.component';
+import { RecordComponent } from './components/personal-records/record/record.component';
+import { EditRecordComponent } from './components/personal-records/edit-record/edit-record.component';
 
 
 
@@ -36,7 +38,9 @@ import { PersonalRecordsComponent } from './components/personal-records/personal
     LandingComponent,
     JumbotronComponent,
     MuscleGroupDropdownComponent,
-    PersonalRecordsComponent
+    PersonalRecordsComponent,
+    RecordComponent,
+    EditRecordComponent,
   ],
   imports: [
     BrowserModule,

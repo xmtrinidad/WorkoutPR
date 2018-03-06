@@ -1,19 +1,54 @@
 <div *ngIf="selectedMuscleGroup">
-  <h3  class="text-center">Showing {{selectedMuscleGroup.name}} PRs</h3>
-  <div class="card mb-3" *ngFor="let exercise of selectedMuscleGroup.exercises">
-    <h3 class="card-header">{{exercise.name}}</h3>
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let pr of exercise.prs" class="list-group-item d-flex justify-content-between align-items-center">
-        {{pr.reps}} reps
-        <span class="badge badge-primary badge-pill">{{pr.max}}</span>
-      </li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Edit</a>
-      <a href="#" class="card-link">Update</a>
+  <h3 class="text-center">Showing {{selectedMuscleGroup.name}} PRs</h3>
+
+  <div class="Records">
+    <!-- Exercise -->
+    <div class="card mb-3" *ngFor="let exercise of selectedMuscleGroup.exercises; let i = index">
+      <h3 (click)="onExerciseClick(i)"
+          class="card-header Records__exercise-title">{{exercise.name}}
+      </h3>
+      <div [ngbCollapse]="!isDesktop && selectedExercise !== i">
+
+        <!-- Record List -->
+        <ul *ngIf="!prService.isEdit" class="list-group list-group-flush">
+          <app-record [exercise]="exercise"></app-record>
+        </ul>
+        <!-- /Record List -->
+
+        <!-- Edit Records -->
+        <ng-container *ngIf="prService.isEdit">
+          <app-edit-record [exercise]="exercise"></app-edit-record>
+        </ng-container>
+        <!-- /Edit Records -->
+
+        <!-- Record Actions -->
+        <div class="card-body">
+          <a (click)="onExerciseEdit()" href="#" class="card-link">Edit</a>
+          <a (click)="onExerciseUpdate(content)" href="#" class="card-link">Update</a>
+        </div>
+        <!-- /Record Actions -->
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Modal title</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>One fine body&hellip;</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+          </div>
+        </ng-template>
+
+        <div class="card-footer text-muted">
+          Last Updated: 2 days ago
+        </div>
+      </div>
     </div>
-    <div class="card-footer text-muted">
-      Last Updated: 2 days ago
-    </div>
+    <!-- /Exercise -->
+
   </div>
+
 </div>
