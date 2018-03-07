@@ -10,11 +10,13 @@ export class PersonalRecordService {
 
   constructor() { }
 
+  // Get exercises from selected muscle group
   getExercises(muscleGroup) {
     const selectedMuscleGroup = PERSONAL_RECORDS.find((muscleGroups) => muscleGroups.name === muscleGroup);
     this._muscleGroup.next(selectedMuscleGroup);
   }
 
+  // Set index for exercise being edited
   editExercise(index) {
     this.editIndex = index;
   }
@@ -23,7 +25,7 @@ export class PersonalRecordService {
    * Update mock data records
    * @param updatedExercise
    */
-  updateRecords(updatedExercise) {
+  updatePrs(updatedExercise) {
     PERSONAL_RECORDS.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updatedExercise.name) {
@@ -35,11 +37,22 @@ export class PersonalRecordService {
     this.editIndex = null;
   }
 
-  updatePr(updated, pr) {
+  addPr(updated, pr) {
     PERSONAL_RECORDS.forEach((muscleGroup, i) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updated.name) {
           exercise.prs.unshift(pr);
+          return true;
+        }
+      });
+    });
+  }
+
+  deletePr(updatedExercise, deletedPr) {
+    PERSONAL_RECORDS.forEach((muscleGroup, i) => {
+      muscleGroup.exercises.find((exercise) => {
+        if (exercise.name === updatedExercise.name) {
+          exercise.prs = exercise.prs.filter((pr) => pr !== deletedPr);
           return true;
         }
       });
