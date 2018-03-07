@@ -6,7 +6,7 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class PersonalRecordService {
   _muscleGroup = new Subject<MuscleGroup>();
-  isEdit = false;
+  editIndex: number;
 
   constructor() { }
 
@@ -15,8 +15,8 @@ export class PersonalRecordService {
     this._muscleGroup.next(selectedMuscleGroup);
   }
 
-  editExercise() {
-    this.isEdit = true;
+  editExercise(index) {
+    this.editIndex = index;
   }
 
   /**
@@ -24,15 +24,15 @@ export class PersonalRecordService {
    * @param updatedExercise
    */
   updateRecords(updatedExercise) {
-    PERSONAL_RECORDS.forEach((muscleGroup, i) => {
+    PERSONAL_RECORDS.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updatedExercise.name) {
-          muscleGroup.exercises[i] = updatedExercise;
+          muscleGroup.exercises[this.editIndex] = updatedExercise;
           return true;
         }
       });
     });
-    this.isEdit = false;
+    this.editIndex = null;
   }
 
   updatePr(updated, pr) {

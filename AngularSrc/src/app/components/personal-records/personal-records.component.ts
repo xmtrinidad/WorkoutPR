@@ -42,6 +42,7 @@ export class PersonalRecordsComponent implements OnInit {
     this.selectedExercise = index;
   }
 
+  // Set edit exercise index
   onExerciseEdit(i) {
     this.prService.editExercise(i);
   }

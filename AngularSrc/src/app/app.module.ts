@@ -23,6 +23,7 @@ import { MuscleGroupDropdownComponent } from './components/muscle-group-dropdown
 import { PersonalRecordsComponent } from './components/personal-records/personal-records.component';
 import { RecordComponent } from './components/personal-records/record/record.component';
 import { EditRecordComponent } from './components/personal-records/edit-record/edit-record.component';
+import { NewPrModalComponent } from './components/personal-records/new-pr-modal/new-pr-modal.component';
 
 
 
@@ -41,6 +42,7 @@ import { EditRecordComponent } from './components/personal-records/edit-record/e
     PersonalRecordsComponent,
     RecordComponent,
     EditRecordComponent,
+    NewPrModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { EditRecordComponent } from './components/personal-records/edit-record/e
     HttpClientModule
   ],
   providers: [ValidateService, AuthService, PersonalRecordService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NewPrModalComponent]
 })
 export class AppModule {}
