@@ -22,6 +22,9 @@ export class EditRecordComponent implements OnInit {
     if (!this.validateService.validateEmptyInputFields(this.exercise.prs)) {
       return;
     }
+    if (!this.validateService.validateIntegersOnly(this.exercise.prs)) {
+      return;
+    }
     this.prService.updatePrs(this.exercise);
   }
 

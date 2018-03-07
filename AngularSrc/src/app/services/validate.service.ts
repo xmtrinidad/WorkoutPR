@@ -23,13 +23,14 @@ export class ValidateService {
     if (Array.isArray(inputs)) {
       // Iterate through all inputs, checking for empty fields
       for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].reps == '' || inputs[i].max == '') {
-          this.validationMessage(`Please fill out all fields or delete entries.`, 'danger');
+        if (inputs[i].reps == null || inputs[i].max == null) {
+          this.validationMessage(`Invalid input or empty fields.`, 'danger');
           return false;
         }
       }
       return true;
     }
+    // Inputs are a single object
     for (const prop in inputs) {
       if (inputs[prop] === undefined || inputs[prop].trim() === '') {
         this.validationMessage(`Please fill out all fields`, 'danger');
@@ -45,6 +46,16 @@ export class ValidateService {
     if (!re.test(email)) {
       this.validationMessage(`Invalid email.  Please enter a valid email to register`, 'danger');
       return false;
+    }
+    return true;
+  }
+
+  validateIntegersOnly(prs) {
+    for (let i = 0; i < prs.length; i++) {
+      if (!Number.isInteger(prs[i].reps) || !Number.isInteger(prs[i].max)) {
+        this.validationMessage(`Enter integers only`, 'danger');
+        return false;
+      }
     }
     return true;
   }

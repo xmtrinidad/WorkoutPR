@@ -5,14 +5,15 @@
   </button>
 </div>
 <div class="modal-body">
-  <form (submit)="onNewRecordSubmit(); activeModal.close('Close click')">
+  <app-alert></app-alert>
+  <form (submit)="onNewRecordSubmit()">
     <div class="form-group">
       <label for="user_reps_{{i}}">Reps</label>
-      <input [(ngModel)]="newReps" name="new_reps" class="form-control" id="user_reps_{{i}}">
+      <input [(ngModel)]="newReps" type="number" name="new_reps" class="form-control" id="user_reps_{{i}}">
     </div>
     <div class="form-group">
       <label for="user_max_{{i}}">Max</label>
-      <input [(ngModel)]="newMax" name="new_max" class="form-control" id="user_max_{{i}}">
+      <input [(ngModel)]="newMax" type="number" name="new_max" class="form-control" id="user_max_{{i}}">
     </div>
     <input type="submit" class="btn btn-primary" value="Submit">
   </form>
