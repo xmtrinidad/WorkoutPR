@@ -4,9 +4,9 @@ export const PERSONAL_RECORDS: MuscleGroup[] = [
   {
     name: 'Legs',
     exercises: [
-      { name: 'Squats', prs: [ {reps: 6, max: 225}, {reps: 4, max: 210}, {reps: 8, max: 200},] },
-      { name: 'Leg Press', prs: [ {reps: 8, max: 450}, {reps: 4, max: 500}, {reps: 2, max: 525},] },
-      { name: 'Leg Ext', prs: [ {reps: 8, max: 150}, {reps: 10, max: 140}, {reps: 6, max: 145},] },
+      { name: 'Squats', prs: [ {reps: 6, max: 200}, {reps: 4, max: 225}, {reps: 8, max: 210},] },
+      { name: 'Leg Press', prs: [ {reps: 8, max: 510}, {reps: 4, max: 500}, {reps: 2, max: 525},] },
+      { name: 'Leg Ext', prs: [ {reps: 8, max: 150}, {reps: 10, max: 165}, {reps: 6, max: 145},] },
     ]
   },
   {

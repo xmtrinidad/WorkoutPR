@@ -53,6 +53,10 @@ export class PersonalRecordsComponent implements OnInit {
     modalRef.componentInstance.exercise = exercise;
   }
 
+  onSortClick(e) {
+    this.prService.selectSort(e.target.innerText);
+  }
+
   /**
    * Check for window resize
    * @param e

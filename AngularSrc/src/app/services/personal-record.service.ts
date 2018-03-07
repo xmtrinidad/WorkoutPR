@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {PERSONAL_RECORDS} from "../models/mock-data";
 import {MuscleGroup} from "../models/MuscleGroup";
-import {Subject} from "rxjs/Subject";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class PersonalRecordService {
-  _muscleGroup = new Subject<MuscleGroup>();
+  _muscleGroup = new BehaviorSubject<MuscleGroup>(PERSONAL_RECORDS[0]);
   editIndex: number;
+  _sortBy = new BehaviorSubject<string>('Max');
 
   constructor() { }
 
@@ -56,6 +57,27 @@ export class PersonalRecordService {
           return true;
         }
       });
+    });
+  }
+
+  // Select sort and set next value to subscribe to
+  selectSort(selectedSort) {
+    this._sortBy.next(selectedSort);
+  }
+
+  sortByMax(prs) {
+    prs.sort((a, b) => {
+      if (a.max < b.max) {
+        return b.max - a.max;
+      }
+    });
+  }
+
+  sortByReps(prs) {
+    prs.sort((a, b) => {
+      if (a.reps < b.reps) {
+        return b.reps - a.reps;
+      }
     });
   }
 
