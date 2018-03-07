@@ -42,8 +42,8 @@ export class PersonalRecordsComponent implements OnInit {
     this.selectedExercise = index;
   }
 
-  onExerciseEdit() {
-    this.prService.editExercise();
+  onExerciseEdit(i) {
+    this.prService.editExercise(i);
   }
 
   // Open modal

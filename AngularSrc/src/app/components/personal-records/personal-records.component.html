@@ -10,20 +10,20 @@
       <div [ngbCollapse]="!isDesktop && selectedExercise !== i">
 
         <!-- Record List -->
-        <ul *ngIf="!prService.isEdit" class="list-group list-group-flush">
+        <ul *ngIf="i !== prService.editIndex" class="list-group list-group-flush">
           <app-record [exercise]="exercise"></app-record>
         </ul>
         <!-- /Record List -->
 
         <!-- Edit Records -->
-        <ng-container *ngIf="prService.isEdit">
+        <ng-container *ngIf="i === prService.editIndex">
           <app-edit-record [exercise]="exercise"></app-edit-record>
         </ng-container>
         <!-- /Edit Records -->
 
         <!-- Record Actions -->
         <div class="card-body">
-          <a (click)="onExerciseEdit()" href="#" class="card-link">Edit</a>
+          <a (click)="onExerciseEdit(i)" href="#" class="card-link">Edit</a>
           <a (click)="onExerciseUpdate(exercise)" href="#" class="card-link">Update</a>
         </div>
         <!-- /Record Actions -->

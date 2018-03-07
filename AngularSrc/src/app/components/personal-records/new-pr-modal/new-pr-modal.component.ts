@@ -19,7 +19,6 @@ export class NewPrModalComponent implements OnInit {
     private prService: PersonalRecordService) { }
 
   ngOnInit() {
-    console.log(this.exercise);
   }
   // Add new pr to exercise
   onNewRecordSubmit() {
