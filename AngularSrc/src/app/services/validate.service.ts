@@ -18,9 +18,20 @@ export class ValidateService {
    * @param user - the user registering
    * @returns {boolean} - false if any fields are undefined or empty
    */
-  validateEmptyInputFields(user) {
-    for (const prop in user) {
-      if (user[prop] === undefined || user[prop].trim() === '') {
+  validateEmptyInputFields(inputs) {
+    // Check if inputs are an array of inputs
+    if (Array.isArray(inputs)) {
+      // Iterate through all inputs, checking for empty fields
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].reps == '' || inputs[i].max == '') {
+          this.validationMessage(`Please fill out all fields or delete entries.`, 'danger');
+          return false;
+        }
+      }
+      return true;
+    }
+    for (const prop in inputs) {
+      if (inputs[prop] === undefined || inputs[prop].trim() === '') {
         this.validationMessage(`Please fill out all fields`, 'danger');
         return false;
       }

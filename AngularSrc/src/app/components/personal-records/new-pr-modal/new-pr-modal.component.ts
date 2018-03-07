@@ -26,7 +26,7 @@ export class NewPrModalComponent implements OnInit {
       reps: this.newReps,
       max: this.newMax
     };
-    this.prService.updatePr(this.exercise, pr);
+    this.prService.addPr(this.exercise, pr);
   }
 
 

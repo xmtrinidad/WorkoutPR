@@ -1,12 +1,18 @@
-<form class="container" (submit)="onExerciseEditSubmit()">
+<form class="container Edit" (submit)="onExerciseEditSubmit()">
   <div *ngFor="let pr of exercise.prs; let i = index;" class="row">
-    <div class="form-group col-6">
+    <div class="form-group col-5 text-center">
       <label for="user_reps">Reps</label>
       <input name="reps__{{i}}" [(ngModel)]="pr.reps"  type="text" id="user_reps" class="form-control">
     </div>
-    <div class="form-group col-6">
+    <div class="form-group col-5 text-center">
       <label for="user_max">Max</label>
       <input name="max__{{i}}" [(ngModel)]="pr.max" type="text" id="user_max" class="form-control">
+    </div>
+    <div class="col-2">
+      <label class="invisible">Delete</label>
+      <div (click)="onDeleteIconClick(pr)" class="Edit__delete-icon text-muted">
+        <i class="fas fa-trash"></i>
+      </div>
     </div>
   </div>
   <div class="text-center my-3">

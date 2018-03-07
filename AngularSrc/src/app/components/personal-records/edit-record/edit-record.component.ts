@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Exercise} from "../../../models/Exercise";
 import {PersonalRecordService} from "../../../services/personal-record.service";
+import {ValidateService} from "../../../services/validate.service";
 
 @Component({
   selector: 'app-edit-record',
@@ -10,13 +11,22 @@ import {PersonalRecordService} from "../../../services/personal-record.service";
 export class EditRecordComponent implements OnInit {
   @Input() exercise: Exercise;
 
-  constructor(public prService: PersonalRecordService) { }
+  constructor(
+    private validateService: ValidateService,
+    public prService: PersonalRecordService) { }
 
   ngOnInit() {
   }
 
   onExerciseEditSubmit() {
-    this.prService.updateRecords(this.exercise);
+    if (!this.validateService.validateEmptyInputFields(this.exercise.prs)) {
+      return;
+    }
+    this.prService.updatePrs(this.exercise);
+  }
+
+  onDeleteIconClick(pr) {
+    this.prService.deletePr(this.exercise, pr);
   }
 
 }
