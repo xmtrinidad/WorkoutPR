@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {PERSONAL_RECORDS} from "../models/mock-data";
 import {MuscleGroup} from "../models/MuscleGroup";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class PersonalRecordService {
+  // BehaviorSubject used to set initial value
   _muscleGroup = new BehaviorSubject<MuscleGroup>(PERSONAL_RECORDS[0]);
   editIndex: number;
-  _sortBy = new BehaviorSubject<string>('Max');
+  _sortBy = new Subject<any>(); // Listen for sort change
 
   constructor() { }
 
@@ -39,7 +41,7 @@ export class PersonalRecordService {
   }
 
   addPr(updated, pr) {
-    PERSONAL_RECORDS.forEach((muscleGroup, i) => {
+    PERSONAL_RECORDS.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updated.name) {
           exercise.prs.unshift(pr);
@@ -50,7 +52,7 @@ export class PersonalRecordService {
   }
 
   deletePr(updatedExercise, deletedPr) {
-    PERSONAL_RECORDS.forEach((muscleGroup, i) => {
+    PERSONAL_RECORDS.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updatedExercise.name) {
           exercise.prs = exercise.prs.filter((pr) => pr !== deletedPr);
@@ -60,9 +62,13 @@ export class PersonalRecordService {
     });
   }
 
-  // Select sort and set next value to subscribe to
-  selectSort(selectedSort) {
-    this._sortBy.next(selectedSort);
+  /**
+   * Select sort type and set exercise being sorted
+   * @param selectedSort - the sort type
+   * @param exercise - the exercise being sorted
+   */
+  selectSort(selectedSort, exercise) {
+    this._sortBy.next({sort: selectedSort, selectedExercise: exercise});
   }
 
   sortByMax(prs) {

@@ -20,11 +20,11 @@ export class RecordComponent implements OnInit {
    * Sort based on selected sort value
    */
   sortRecords() {
-    this.prService._sortBy.subscribe((selectedSort) => {
-      if (selectedSort === 'Max') {
-        this.prService.sortByMax(this.exercise.prs);
+    this.prService._sortBy.subscribe((data) => {
+      if (data.sort === 'Max') {
+        this.prService.sortByMax(data.selectedExercise.prs);
       } else {
-        this.prService.sortByReps(this.exercise.prs);
+        this.prService.sortByReps(data.selectedExercise.prs);
       }
     });
   }

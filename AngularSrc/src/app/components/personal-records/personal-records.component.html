@@ -25,13 +25,15 @@
         <div class="card-body">
           <a (click)="onExerciseEdit(i)" href="#" class="card-link">Edit</a>
           <a (click)="onExerciseUpdate(exercise)" href="#" class="card-link">Add</a>
+          <!-- Sort Dropdown -->
           <div ngbDropdown class="d-inline-block float-right">
             <button class="btn btn-link" id="dropdownBasic1" ngbDropdownToggle>Sort By</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button (click)="onSortClick($event)" class="dropdown-item">Max</button>
-              <button (click)="onSortClick($event)" class="dropdown-item">Reps</button>
+              <button (click)="onSortClick($event, exercise)" class="dropdown-item">Max</button>
+              <button (click)="onSortClick($event, exercise)" class="dropdown-item">Reps</button>
             </div>
           </div>
+          <!-- /Sort Dropdown -->
         </div>
         <!-- /Record Actions -->
 

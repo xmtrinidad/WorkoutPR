@@ -53,8 +53,14 @@ export class PersonalRecordsComponent implements OnInit {
     modalRef.componentInstance.exercise = exercise;
   }
 
-  onSortClick(e) {
-    this.prService.selectSort(e.target.innerText);
+  /**
+   * Get button text to determine sort type
+   * Get exercise from card clicked
+   * @param e
+   * @param exercise
+   */
+  onSortClick(e, exercise) {
+    this.prService.selectSort(e.target.innerText, exercise);
   }
 
   /**
