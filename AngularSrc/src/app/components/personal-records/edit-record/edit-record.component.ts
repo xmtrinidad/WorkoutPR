@@ -29,4 +29,8 @@ export class EditRecordComponent implements OnInit {
     this.prService.deletePr(this.exercise, pr);
   }
 
+  onCancelEdit() {
+    this.prService.editIndex = undefined;
+  }
+
 }
