@@ -11,6 +11,7 @@ import {ValidateService} from "../../../services/validate.service";
 export class EditRecordComponent implements OnInit {
   @Input() exercise: Exercise;
 
+
   constructor(
     private validateService: ValidateService,
     public prService: PersonalRecordService) { }
@@ -26,13 +27,14 @@ export class EditRecordComponent implements OnInit {
       return;
     }
     this.prService.updatePrs(this.exercise);
+    this.cancelEdit();
   }
 
   onDeleteIconClick(pr) {
     this.prService.deletePr(this.exercise, pr);
   }
 
-  onCancelEdit() {
+  cancelEdit() {
     this.prService.editIndex = undefined;
   }
 

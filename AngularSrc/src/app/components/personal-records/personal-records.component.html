@@ -21,7 +21,7 @@
         <form
           class="d-flex justify-content-between row"
           *ngIf="isChangeExerciseName && selectedExercise === i"
-          (submit)="onSubmitExerciseNameChange(changedExerciseName, selectedMuscleGroup, exercise)">
+          (submit)="onSubmitExerciseNameChange(changedExerciseName, exercise)">
           <div class="col-12">
             <label for="user_change_name">Exercise Name</label>
             <input [value]="exercise.name" #changedExerciseName type="text" class="form-control mr-2" id="user_change_name">
@@ -38,7 +38,7 @@
           <span ngbDropdownToggle><i class="fas fa-ellipsis-v fa-lg"></i></span>
           <div ngbDropdownMenu>
             <button (click)="onChangeExerciseNameClick(i)" class="dropdown-item">Change Exercise Name</button>
-            <button (click)="onDeleteExerciseClick(selectedMuscleGroup, exercise)" class="dropdown-item">Delete Exercise</button>
+            <button (click)="onDeleteExerciseClick(exercise)" class="dropdown-item">Delete Exercise</button>
           </div>
         </div>
         <!-- /Exercise Options Dropdown -->
@@ -62,8 +62,8 @@
 
         <!-- Record Actions -->
         <div *ngIf="!isChangeExerciseName" class="card-body">
-          <a (click)="onExerciseEdit(i)" href="#" class="card-link">Edit</a>
-          <a (click)="onExerciseUpdate(exercise)" href="#" class="card-link">Add</a>
+          <a (click)="onEditPrs(i)" href="#" class="card-link">Edit</a>
+          <a (click)="onAddPr(exercise)" href="#" class="card-link">Add</a>
           <!-- Sort Dropdown -->
           <div ngbDropdown placement="bottom-right" class="d-inline-block float-right">
             <button class="btn btn-link Records__sort-by-btn" ngbDropdownToggle>Sort By</button>

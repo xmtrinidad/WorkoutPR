@@ -29,7 +29,10 @@ export class PersonalRecordsComponent implements OnInit {
 
   ngOnInit() {
     // Listen for muscle group select
-    this.prService._muscleGroup.subscribe((selected) => this.selectedMuscleGroup = selected);
+    this.prService._muscleGroup.subscribe((selected) => {
+      this.prService.currentRecord = selected;
+      this.selectedMuscleGroup = selected;
+    });
     // Check for desktop and open drop downs if true
     this.checkForDesktop(768);
   }
@@ -52,13 +55,13 @@ export class PersonalRecordsComponent implements OnInit {
     this.isChangeExerciseName = true;
   }
 
-  onSubmitExerciseNameChange(changedName, muscleGroup, exercise) {
+  onSubmitExerciseNameChange(changedName, exercise) {
     // Check for empty input
     if (changedName.value.trim() === '') {
       this.validateService.validationMessage('Enter an exercise name.', 'danger');
       return;
     }
-    this.prService.changeExerciseName(changedName.value, muscleGroup, exercise);
+    this.prService.changeExerciseName(changedName.value, exercise);
     this.isChangeExerciseName = false;
     this.selectedExercise = null;
   }
@@ -68,8 +71,8 @@ export class PersonalRecordsComponent implements OnInit {
     this.selectedExercise = null
   }
 
-  onDeleteExerciseClick(muscleGroup, exercise) {
-    this.prService.deleteExercise(muscleGroup, exercise);
+  onDeleteExerciseClick(exercise) {
+    this.prService.deleteExercise(exercise);
   }
 
   /**
@@ -89,13 +92,13 @@ export class PersonalRecordsComponent implements OnInit {
     this.selectedExercise = index;
   }
 
-  // Set edit exercise index
-  onExerciseEdit(i) {
-    this.prService.editPrs(i);
+  // Set index for exercise being edited
+  onEditPrs(index) {
+    this.prService.editPrs(index);
   }
 
   // Open modal
-  onExerciseUpdate(exercise) {
+  onAddPr(exercise) {
     const modalRef = this.modalService.open(NewPrModalComponent);
     modalRef.componentInstance.exercise = exercise;
   }

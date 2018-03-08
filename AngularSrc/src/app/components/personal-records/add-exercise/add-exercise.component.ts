@@ -21,7 +21,7 @@ export class AddExerciseComponent implements OnInit {
       name: this.exerciseName,
       prs: []
     };
-    this.prService.addExercise(createdExercise, this.muscleGroupName);
+    this.prService.addExercise(createdExercise);
     this.exerciseName = null;
   }
 
