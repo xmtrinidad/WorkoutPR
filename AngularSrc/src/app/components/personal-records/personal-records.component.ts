@@ -42,24 +42,45 @@ export class PersonalRecordsComponent implements OnInit {
       this.addExerciseBtnText = 'Add Exercise';
   }
 
-  onChangeExerciseNameClick() {
+  /**
+   * Get index of exercise name being changed
+   * Set change boolean to true
+   * @param i
+   */
+  onChangeExerciseNameClick(i) {
+    this.selectedExercise = i;
     this.isChangeExerciseName = true;
   }
 
-  onSubmitExerciseNameChange(changedName, exercise) {
+  onSubmitExerciseNameChange(changedName, muscleGroup, exercise) {
+    // Check for empty input
     if (changedName.value.trim() === '') {
       this.validateService.validationMessage('Enter an exercise name.', 'danger');
       return;
     }
-    this.prService.changeExerciseName(changedName.value, exercise);
+    this.prService.changeExerciseName(changedName.value, muscleGroup, exercise);
     this.isChangeExerciseName = false;
+    this.selectedExercise = null;
+  }
+
+  onChangeNameCancel() {
+    this.isChangeExerciseName = false;
+    this.selectedExercise = null
+  }
+
+  onDeleteExerciseClick(muscleGroup, exercise) {
+    this.prService.deleteExercise(muscleGroup, exercise);
   }
 
   /**
    * Toggle drop down on exercise name click
    * @param index
    */
-  onExerciseClick(index) {
+  onExerciseClick(index, e) {
+    // Prevent card collapse if options click
+    if (!e.target.classList.contains('card-header')) {
+      return;
+    }
     // Toggle
     if (index === this.selectedExercise) {
       this.selectedExercise = null;
