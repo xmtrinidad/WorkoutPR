@@ -80,6 +80,10 @@ export class PersonalRecordsComponent implements OnInit {
    * @param index
    */
   onExerciseClick(index, e) {
+    console.log(e.target);
+    if (this.isDesktop) {
+      return;
+    }
     // Prevent card collapse if options click
     if (!e.target.classList.contains('card-header')) {
       return;

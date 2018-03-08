@@ -12,7 +12,7 @@
       <div (click)="onExerciseClick(i, $event)" class="card-header d-flex justify-content-between">
         <!-- Exercise Title -->
         <h4
-          *ngIf="selectedExercise !== i"
+          *ngIf="!isChangeExerciseName || selectedExercise !== i"
           class="Records__exercise-title">{{exercise.name}}
         </h4>
         <!-- /Exercise Title -->
@@ -34,7 +34,7 @@
         <!-- /Change Exercise Name Form -->
 
         <!-- Exercise Options Dropdown -->
-        <div *ngIf="selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
+        <div *ngIf="!isChangeExerciseName || selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
           <span ngbDropdownToggle><i class="fas fa-ellipsis-v fa-lg"></i></span>
           <div ngbDropdownMenu>
             <button (click)="onChangeExerciseNameClick(i)" class="dropdown-item">Change Exercise Name</button>
