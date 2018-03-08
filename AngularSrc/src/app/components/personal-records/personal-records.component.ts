@@ -3,6 +3,7 @@ import {MuscleGroup} from "../../models/MuscleGroup";
 import {PersonalRecordService} from "../../services/personal-record.service";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NewPrModalComponent} from "./new-pr-modal/new-pr-modal.component";
+import {ValidateService} from "../../services/validate.service";
 
 @Component({
   selector: 'app-personal-records',
@@ -17,10 +18,12 @@ export class PersonalRecordsComponent implements OnInit {
   selectedExercise: number;
   isDesktop: boolean;
   isAddExercise = false;
+  isChangeExerciseName = false;
   addExerciseBtnText = 'Add Exercise';
 
 
   constructor(
+    private validateService: ValidateService,
     private modalService: NgbModal,
     public prService: PersonalRecordService) { }
 
@@ -37,6 +40,19 @@ export class PersonalRecordsComponent implements OnInit {
     this.isAddExercise ?
       this.addExerciseBtnText = 'Hide Add Exercise' :
       this.addExerciseBtnText = 'Add Exercise';
+  }
+
+  onChangeExerciseNameClick() {
+    this.isChangeExerciseName = true;
+  }
+
+  onSubmitExerciseNameChange(changedName, exercise) {
+    if (changedName.value.trim() === '') {
+      this.validateService.validationMessage('Enter an exercise name.', 'danger');
+      return;
+    }
+    this.prService.changeExerciseName(changedName.value, exercise);
+    this.isChangeExerciseName = false;
   }
 
   /**

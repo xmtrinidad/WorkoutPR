@@ -5,7 +5,22 @@
 .Records__exercise-title {
   cursor: pointer;
   user-select: none;
+  padding: 0;
+  margin: 0;
+}
 
+.Records__exercise-options span {
+  cursor: pointer;
+  padding: 3px 7px;
+}
+
+/** Hide drop down arrow on dots button**/
+.Records__exercise-options .dropdown-toggle::after {
+  display: none;
+}
+
+.Records__sort-by-btn {
+  padding: 0;
 }
 
 @media (min-width: 768px) {

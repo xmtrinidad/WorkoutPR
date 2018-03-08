@@ -24,6 +24,7 @@ import { PersonalRecordsComponent } from './components/personal-records/personal
 import { RecordComponent } from './components/personal-records/record/record.component';
 import { EditRecordComponent } from './components/personal-records/edit-record/edit-record.component';
 import { NewPrModalComponent } from './components/personal-records/new-pr-modal/new-pr-modal.component';
+import { AddExerciseComponent } from './components/personal-records/add-exercise/add-exercise.component';
 
 
 
@@ -43,6 +44,7 @@ import { NewPrModalComponent } from './components/personal-records/new-pr-modal/
     RecordComponent,
     EditRecordComponent,
     NewPrModalComponent,
+    AddExerciseComponent,
   ],
   imports: [
     BrowserModule,

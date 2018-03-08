@@ -26,3 +26,26 @@ export const PERSONAL_RECORDS: MuscleGroup[] = [
     ]
   }
 ];
+
+export const PERSONAL_RECORDS_EMPTY: MuscleGroup[] = [
+  {
+    name: 'Legs',
+    exercises: []
+  },
+  {
+    name: 'Back',
+    exercises: []
+  },
+  {
+    name: 'Chest',
+    exercises: []
+  },
+  {
+    name: 'Arms',
+    exercises: []
+  },
+  {
+    name: 'Shoulders',
+    exercises: []
+  }
+];

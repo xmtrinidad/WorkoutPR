@@ -1,26 +1,47 @@
 import { Injectable } from '@angular/core';
 import {PERSONAL_RECORDS} from "../models/mock-data";
+import {PERSONAL_RECORDS_EMPTY} from "../models/mock-data";
 import {MuscleGroup} from "../models/MuscleGroup";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Subject} from "rxjs/Subject";
+import {Exercise} from "../models/Exercise";
 
 @Injectable()
 export class PersonalRecordService {
   // BehaviorSubject used to set initial value
-  _muscleGroup = new BehaviorSubject<MuscleGroup>(PERSONAL_RECORDS[0]);
+  _muscleGroup = new BehaviorSubject<MuscleGroup>(PERSONAL_RECORDS_EMPTY[0]);
+  // Listen for sort change
+  _sortBy = new Subject<any>();
   editIndex: number;
-  _sortBy = new Subject<any>(); // Listen for sort change
+
+
 
   constructor() { }
 
+  addExercise(exercise: Exercise, muscleGroupName: string) {
+    const obj = PERSONAL_RECORDS_EMPTY.find((group) => group.name === muscleGroupName);
+    obj.exercises.push(exercise);
+  }
+
+  changeExerciseName(newName, ex) {
+    PERSONAL_RECORDS_EMPTY.forEach((muscleGroup) => {
+      muscleGroup.exercises.find((exercise) => {
+        if (exercise.name === ex.name) {
+          exercise.name = newName;
+          return true;
+        }
+      });
+    });
+  }
+
   // Get exercises from selected muscle group
   getExercises(muscleGroup) {
-    const selectedMuscleGroup = PERSONAL_RECORDS.find((muscleGroups) => muscleGroups.name === muscleGroup);
+    const selectedMuscleGroup = PERSONAL_RECORDS_EMPTY.find((muscleGroups) => muscleGroups.name === muscleGroup);
     this._muscleGroup.next(selectedMuscleGroup);
   }
 
   // Set index for exercise being edited
-  editExercise(index) {
+  editPrs(index) {
     this.editIndex = index;
   }
 
@@ -29,7 +50,7 @@ export class PersonalRecordService {
    * @param updatedExercise
    */
   updatePrs(updatedExercise) {
-    PERSONAL_RECORDS.forEach((muscleGroup) => {
+    PERSONAL_RECORDS_EMPTY.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updatedExercise.name) {
           muscleGroup.exercises[this.editIndex] = updatedExercise;
@@ -41,7 +62,7 @@ export class PersonalRecordService {
   }
 
   addPr(updated, pr) {
-    PERSONAL_RECORDS.forEach((muscleGroup) => {
+    PERSONAL_RECORDS_EMPTY.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updated.name) {
           exercise.prs.unshift(pr);
@@ -52,7 +73,7 @@ export class PersonalRecordService {
   }
 
   deletePr(updatedExercise, deletedPr) {
-    PERSONAL_RECORDS.forEach((muscleGroup) => {
+    PERSONAL_RECORDS_EMPTY.forEach((muscleGroup) => {
       muscleGroup.exercises.find((exercise) => {
         if (exercise.name === updatedExercise.name) {
           exercise.prs = exercise.prs.filter((pr) => pr !== deletedPr);

@@ -7,7 +7,7 @@ import {PersonalRecordService} from "../../services/personal-record.service";
   styleUrls: ['./muscle-group-dropdown.component.css']
 })
 export class MuscleGroupDropdownComponent implements OnInit {
-  btnValues = ['Legs', 'Back', 'Chest'];
+  btnValues = ['Legs', 'Back', 'Chest', 'Arms', 'Shoulders'];
 
   constructor(private pr: PersonalRecordService) { }
 
