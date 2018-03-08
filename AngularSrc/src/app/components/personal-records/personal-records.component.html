@@ -1,6 +1,9 @@
 <div *ngIf="selectedMuscleGroup">
   <!-- Page Title -->
   <h3 class="text-center">Showing {{selectedMuscleGroup.name}} PRs</h3>
+  <div class="text-center">
+    <button (click)="onAddExerciseClick()" type="button" class="btn btn-outline-info my-2">{{addExerciseBtnText}}</button>
+  </div>
   <div class="Records">
     <!-- Exercise -->
     <div class="card mb-3" *ngFor="let exercise of selectedMuscleGroup.exercises; let i = index">
@@ -43,6 +46,7 @@
       </div>
     </div>
     <!-- /Exercise -->
+    <app-add-exercise *ngIf="isAddExercise" [muscleGroupName]="selectedMuscleGroup.name"></app-add-exercise>
 
   </div>
 

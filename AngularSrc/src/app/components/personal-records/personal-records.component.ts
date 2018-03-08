@@ -16,6 +16,8 @@ export class PersonalRecordsComponent implements OnInit {
   selectedMuscleGroup: MuscleGroup;
   selectedExercise: number;
   isDesktop: boolean;
+  isAddExercise = false;
+  addExerciseBtnText = 'Add Exercise';
 
 
   constructor(
@@ -27,6 +29,14 @@ export class PersonalRecordsComponent implements OnInit {
     this.prService._muscleGroup.subscribe((selected) => this.selectedMuscleGroup = selected);
     // Check for desktop and open drop downs if true
     this.checkForDesktop(768);
+  }
+
+  // Toggle add exercise card and btn text
+  onAddExerciseClick() {
+    this.isAddExercise = !this.isAddExercise;
+    this.isAddExercise ?
+      this.addExerciseBtnText = 'Hide Add Exercise' :
+      this.addExerciseBtnText = 'Add Exercise';
   }
 
   /**
@@ -44,7 +54,7 @@ export class PersonalRecordsComponent implements OnInit {
 
   // Set edit exercise index
   onExerciseEdit(i) {
-    this.prService.editExercise(i);
+    this.prService.editPrs(i);
   }
 
   // Open modal
