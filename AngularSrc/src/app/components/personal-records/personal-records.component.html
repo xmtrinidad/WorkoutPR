@@ -9,11 +9,10 @@
     <div class="card mb-3" *ngFor="let exercise of selectedMuscleGroup.exercises; let i = index">
 
       <!-- Exercise Card Header -->
-      <div class="card-header d-flex justify-content-between">
+      <div (click)="onExerciseClick(i, $event)" class="card-header d-flex justify-content-between">
         <!-- Exercise Title -->
         <h4
-          *ngIf="!isChangeExerciseName"
-          (click)="onExerciseClick(i)"
+          *ngIf="selectedExercise !== i"
           class="Records__exercise-title">{{exercise.name}}
         </h4>
         <!-- /Exercise Title -->
@@ -21,25 +20,25 @@
         <!-- Change Exercise Name Form -->
         <form
           class="d-flex justify-content-between row"
-          *ngIf="isChangeExerciseName"
-          (submit)="onSubmitExerciseNameChange(changedExerciseName, exercise)">
+          *ngIf="isChangeExerciseName && selectedExercise === i"
+          (submit)="onSubmitExerciseNameChange(changedExerciseName, selectedMuscleGroup, exercise)">
           <div class="col-12">
             <label for="user_change_name">Exercise Name</label>
             <input [value]="exercise.name" #changedExerciseName type="text" class="form-control mr-2" id="user_change_name">
           </div>
           <div class="col-12 mt-2">
             <input type="submit" class="btn btn-primary" value="Submit">
-            <button (click)="isChangeExerciseName = false" type="button" class="btn btn-secondary">Cancel</button>
+            <button (click)="onChangeNameCancel()" type="button" class="btn btn-secondary">Cancel</button>
           </div>
         </form>
         <!-- /Change Exercise Name Form -->
 
         <!-- Exercise Options Dropdown -->
-        <div *ngIf="!isChangeExerciseName" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
+        <div *ngIf="selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
           <span ngbDropdownToggle><i class="fas fa-ellipsis-v fa-lg"></i></span>
           <div ngbDropdownMenu>
-            <button (click)="onChangeExerciseNameClick()" class="dropdown-item">Change Exercise Name</button>
-            <button class="dropdown-item">Delete Exercise</button>
+            <button (click)="onChangeExerciseNameClick(i)" class="dropdown-item">Change Exercise Name</button>
+            <button (click)="onDeleteExerciseClick(selectedMuscleGroup, exercise)" class="dropdown-item">Delete Exercise</button>
           </div>
         </div>
         <!-- /Exercise Options Dropdown -->
@@ -62,7 +61,7 @@
         <!-- /Edit Records -->
 
         <!-- Record Actions -->
-        <div class="card-body">
+        <div *ngIf="!isChangeExerciseName" class="card-body">
           <a (click)="onExerciseEdit(i)" href="#" class="card-link">Edit</a>
           <a (click)="onExerciseUpdate(exercise)" href="#" class="card-link">Add</a>
           <!-- Sort Dropdown -->

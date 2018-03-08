@@ -9,14 +9,14 @@ import {PersonalRecordService} from "../../services/personal-record.service";
 export class MuscleGroupDropdownComponent implements OnInit {
   btnValues = ['Legs', 'Back', 'Chest', 'Arms', 'Shoulders'];
 
-  constructor(private pr: PersonalRecordService) { }
+  constructor(private prService: PersonalRecordService) { }
 
   ngOnInit() {
   }
 
   onMuscleGroupClick(clickedBtn) {
     const muscleGroup = clickedBtn.target.innerText;
-    this.pr.getExercises(muscleGroup);
+    this.prService.getExercises(muscleGroup);
   }
 
 }
