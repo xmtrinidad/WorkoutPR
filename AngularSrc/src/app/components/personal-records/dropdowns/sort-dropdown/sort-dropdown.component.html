@@ -1,0 +1,9 @@
+<!-- Sort Dropdown -->
+<div ngbDropdown placement="bottom-right" class="d-inline-block float-right Sort-by">
+  <button class="btn btn-link Sort-by__btn" ngbDropdownToggle>Sort By</button>
+  <div ngbDropdownMenu>
+    <button (click)="onSortClick($event)" class="dropdown-item">Max</button>
+    <button (click)="onSortClick($event)" class="dropdown-item">Reps</button>
+  </div>
+</div>
+<!-- /Sort Dropdown -->

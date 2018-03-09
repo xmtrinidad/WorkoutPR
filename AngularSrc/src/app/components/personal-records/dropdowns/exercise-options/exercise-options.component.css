@@ -1,0 +1,9 @@
+.Options__icon {
+  cursor: pointer;
+  padding: 3px 7px;
+}
+
+/** Hide drop down arrow on dots button**/
+.Options__icon::after {
+  display: none;
+}

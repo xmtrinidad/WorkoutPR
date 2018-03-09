@@ -26,7 +26,7 @@ export class ExerciseOptionsComponent implements OnInit {
    * @param i
    */
   onChangeExerciseNameClick() {
-    this.prService.selectedExerciseIndex = this.index;
+    this.prService.editIndex = this.index;
     this.prService.isChangeExerciseName = true;
   }
 

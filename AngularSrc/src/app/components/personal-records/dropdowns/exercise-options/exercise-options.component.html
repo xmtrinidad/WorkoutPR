@@ -1,6 +1,6 @@
 <!-- Exercise Options Dropdown -->
-<div *ngIf="!prService.isChangeExerciseName || selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
-  <span ngbDropdownToggle><i class="fas fa-ellipsis-v fa-lg"></i></span>
+<div class="Options" *ngIf="!prService.isChangeExerciseName || selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
+  <span ngbDropdownToggle class="Options__icon"><i class="fas fa-ellipsis-v fa-lg"></i></span>
   <div ngbDropdownMenu>
     <button (click)="onChangeExerciseNameClick()" class="dropdown-item">Change Exercise Name</button>
     <button (click)="onDeleteExerciseClick()" class="dropdown-item">Delete Exercise</button>
