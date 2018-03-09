@@ -22,6 +22,7 @@ export class AddExerciseComponent implements OnInit {
       prs: []
     };
     this.prService.addExercise(createdExercise);
+    this.prService.isAddExercise = false;
     this.exerciseName = null;
   }
 

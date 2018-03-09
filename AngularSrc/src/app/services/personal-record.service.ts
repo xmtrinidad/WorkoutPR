@@ -14,12 +14,11 @@ export class PersonalRecordService {
   // Listen for sort change
   _sortBy = new Subject<any>();
   editIndex: number;
-
-
+  isPrEdit = false;
+  isChangeExerciseName = false;
+  isAddExercise = false;
 
   constructor() { }
-
-
 
   addExercise(exercise: Exercise) {
     this.currentRecord.exercises.push(exercise);
@@ -52,6 +51,7 @@ export class PersonalRecordService {
 
   // Set index for exercise being edited
   editPrs(index) {
+    this.isPrEdit = true;
     this.editIndex = index;
   }
 

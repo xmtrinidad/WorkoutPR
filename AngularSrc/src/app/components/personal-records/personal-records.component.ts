@@ -16,7 +16,6 @@ import {ValidateService} from "../../services/validate.service";
 export class PersonalRecordsComponent implements OnInit {
   selectedMuscleGroup: MuscleGroup;
   isDesktop: boolean;
-  isAddExercise = false;
   addExerciseBtnText = 'Add Exercise';
 
 
@@ -37,10 +36,7 @@ export class PersonalRecordsComponent implements OnInit {
 
   // Toggle add exercise card and btn text
   onAddExerciseClick() {
-    this.isAddExercise = !this.isAddExercise;
-    this.isAddExercise ?
-      this.addExerciseBtnText = 'Hide Add Exercise' :
-      this.addExerciseBtnText = 'Add Exercise';
+    this.prService.isAddExercise = true;
   }
 
   /**

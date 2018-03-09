@@ -25,6 +25,9 @@ import { RecordComponent } from './components/personal-records/record/record.com
 import { EditRecordComponent } from './components/personal-records/edit-record/edit-record.component';
 import { NewPrModalComponent } from './components/personal-records/new-pr-modal/new-pr-modal.component';
 import { AddExerciseComponent } from './components/personal-records/add-exercise/add-exercise.component';
+import { ExerciseOptionsComponent } from './components/personal-records/dropdowns/exercise-options/exercise-options.component';
+import { SortDropdownComponent } from './components/personal-records/dropdowns/sort-dropdown/sort-dropdown.component';
+import { ChangeExerciseNameComponent } from './components/personal-records/change-exercise-name/change-exercise-name.component';
 
 
 
@@ -45,6 +48,9 @@ import { AddExerciseComponent } from './components/personal-records/add-exercise
     EditRecordComponent,
     NewPrModalComponent,
     AddExerciseComponent,
+    ExerciseOptionsComponent,
+    SortDropdownComponent,
+    ChangeExerciseNameComponent
   ],
   imports: [
     BrowserModule,

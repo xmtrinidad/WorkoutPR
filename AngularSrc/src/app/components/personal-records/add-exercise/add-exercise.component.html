@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 Add-exercise">
   <h4 class="card-header">{{exerciseName}}</h4>
   <form class="card-body" (submit)="onAddExerciseSubmit()">
     <div class="form-group">
@@ -6,5 +6,6 @@
       <input type="text" name="exercise_name" [(ngModel)]="exerciseName" id="user_exercise" class="form-control">
     </div>
     <input type="submit" class="btn btn-primary" value="Submit">
+    <button (click)="prService.isAddExercise = false" type="button" class="btn btn-secondary">Cancel</button>
   </form>
 </div>
