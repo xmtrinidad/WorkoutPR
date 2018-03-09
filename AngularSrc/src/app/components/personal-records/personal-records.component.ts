@@ -43,22 +43,6 @@ export class PersonalRecordsComponent implements OnInit {
       this.addExerciseBtnText = 'Add Exercise';
   }
 
-  onSubmitExerciseNameChange(changedName, exercise) {
-    // Check for empty input
-    if (changedName.value.trim() === '') {
-      this.validateService.validationMessage('Enter an exercise name.', 'danger');
-      return;
-    }
-    this.prService.changeExerciseName(changedName.value, exercise);
-    this.prService.isChangeExerciseName = false;
-    this.prService.editIndex = null;
-  }
-
-  onChangeNameCancel() {
-    this.prService.isChangeExerciseName = false;
-    this.prService.editIndex = null
-  }
-
   /**
    * Toggle drop down on exercise name click
    * @param index
