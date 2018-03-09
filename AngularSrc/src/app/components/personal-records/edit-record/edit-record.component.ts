@@ -35,6 +35,7 @@ export class EditRecordComponent implements OnInit {
   }
 
   cancelEdit() {
+    this.prService.isPrEdit = false;
     this.prService.editIndex = undefined;
   }
 

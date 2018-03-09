@@ -1,0 +1,14 @@
+<!-- Change Exercise Name Form -->
+<form
+  class="d-flex justify-content-between row"
+  (submit)="onSubmitExerciseNameChange(changedExerciseName)">
+  <div class="col-12">
+    <label for="user_change_name">Exercise Name</label>
+    <input [value]="exercise.name" #changedExerciseName type="text" class="form-control mr-2" id="user_change_name">
+  </div>
+  <div class="col-12 mt-2">
+    <input type="submit" class="btn btn-primary" value="Submit">
+    <button (click)="onChangeNameCancel()" type="button" class="btn btn-secondary">Cancel</button>
+  </div>
+</form>
+<!-- /Change Exercise Name Form -->

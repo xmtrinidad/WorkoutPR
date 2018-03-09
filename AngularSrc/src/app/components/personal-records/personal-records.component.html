@@ -12,67 +12,46 @@
       <div (click)="onExerciseClick(i, $event)" class="card-header d-flex justify-content-between">
         <!-- Exercise Title -->
         <h4
-          *ngIf="!isChangeExerciseName || selectedExercise !== i"
+          *ngIf="!prService.isChangeExerciseName || prService.editIndex !== i"
           class="Records__exercise-title">{{exercise.name}}
         </h4>
-        <!-- /Exercise Title -->
 
-        <!-- Change Exercise Name Form -->
-        <form
-          class="d-flex justify-content-between row"
-          *ngIf="isChangeExerciseName && selectedExercise === i"
-          (submit)="onSubmitExerciseNameChange(changedExerciseName, exercise)">
-          <div class="col-12">
-            <label for="user_change_name">Exercise Name</label>
-            <input [value]="exercise.name" #changedExerciseName type="text" class="form-control mr-2" id="user_change_name">
-          </div>
-          <div class="col-12 mt-2">
-            <input type="submit" class="btn btn-primary" value="Submit">
-            <button (click)="onChangeNameCancel()" type="button" class="btn btn-secondary">Cancel</button>
-          </div>
-        </form>
-        <!-- /Change Exercise Name Form -->
+        <!-- Exercise Name Change -->
+        <ng-container *ngIf="prService.isChangeExerciseName && prService.editIndex === i">
+          <app-change-exercise-name [index]="i" [exercise]="exercise"></app-change-exercise-name>
+        </ng-container>
 
         <!-- Exercise Options Dropdown -->
-        <div *ngIf="!isChangeExerciseName || selectedExercise !== i" ngbDropdown placement="bottom-right" class="align-self-center Records__exercise-options">
-          <span ngbDropdownToggle><i class="fas fa-ellipsis-v fa-lg"></i></span>
-          <div ngbDropdownMenu>
-            <button (click)="onChangeExerciseNameClick(i)" class="dropdown-item">Change Exercise Name</button>
-            <button (click)="onDeleteExerciseClick(exercise)" class="dropdown-item">Delete Exercise</button>
-          </div>
-        </div>
-        <!-- /Exercise Options Dropdown -->
+        <ng-container *ngIf="!prService.isChangeExerciseName || selectedExercise !== i">
+          <app-exercise-options [exercise]="exercise" [index]="i"></app-exercise-options>
+        </ng-container>
+
 
       </div>
       <!-- /Exercise Card Header -->
 
-      <div [ngbCollapse]="!isDesktop && selectedExercise !== i">
+      <div [ngbCollapse]="!isDesktop && prService.editIndex !== i">
 
         <!-- Record List -->
-        <ul *ngIf="i !== prService.editIndex" class="list-group list-group-flush">
+        <ul *ngIf="!prService.isPrEdit || i !== prService.editIndex" class="list-group list-group-flush">
           <app-record [exercise]="exercise"></app-record>
         </ul>
         <!-- /Record List -->
 
         <!-- Edit Records -->
-        <ng-container *ngIf="i === prService.editIndex">
+        <ng-container *ngIf="prService.isPrEdit && i === prService.editIndex">
           <app-edit-record [exercise]="exercise"></app-edit-record>
         </ng-container>
         <!-- /Edit Records -->
 
         <!-- Record Actions -->
-        <div *ngIf="!isChangeExerciseName" class="card-body">
+        <div *ngIf="!prService.isChangeExerciseName" class="card-body">
           <a (click)="onEditPrs(i)" href="#" class="card-link">Edit</a>
           <a (click)="onAddPr(exercise)" href="#" class="card-link">Add</a>
+
           <!-- Sort Dropdown -->
-          <div ngbDropdown placement="bottom-right" class="d-inline-block float-right">
-            <button class="btn btn-link Records__sort-by-btn" ngbDropdownToggle>Sort By</button>
-            <div ngbDropdownMenu>
-              <button (click)="onSortClick($event, exercise)" class="dropdown-item">Max</button>
-              <button (click)="onSortClick($event, exercise)" class="dropdown-item">Reps</button>
-            </div>
-          </div>
-          <!-- /Sort Dropdown -->
+          <app-sort-dropdown [exercise]="exercise"></app-sort-dropdown>
+
         </div>
         <!-- /Record Actions -->
 

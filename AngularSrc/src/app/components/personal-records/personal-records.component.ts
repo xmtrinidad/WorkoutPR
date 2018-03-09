@@ -15,10 +15,8 @@ import {ValidateService} from "../../services/validate.service";
 })
 export class PersonalRecordsComponent implements OnInit {
   selectedMuscleGroup: MuscleGroup;
-  selectedExercise: number;
   isDesktop: boolean;
   isAddExercise = false;
-  isChangeExerciseName = false;
   addExerciseBtnText = 'Add Exercise';
 
 
@@ -45,16 +43,6 @@ export class PersonalRecordsComponent implements OnInit {
       this.addExerciseBtnText = 'Add Exercise';
   }
 
-  /**
-   * Get index of exercise name being changed
-   * Set change boolean to true
-   * @param i
-   */
-  onChangeExerciseNameClick(i) {
-    this.selectedExercise = i;
-    this.isChangeExerciseName = true;
-  }
-
   onSubmitExerciseNameChange(changedName, exercise) {
     // Check for empty input
     if (changedName.value.trim() === '') {
@@ -62,17 +50,13 @@ export class PersonalRecordsComponent implements OnInit {
       return;
     }
     this.prService.changeExerciseName(changedName.value, exercise);
-    this.isChangeExerciseName = false;
-    this.selectedExercise = null;
+    this.prService.isChangeExerciseName = false;
+    this.prService.editIndex = null;
   }
 
   onChangeNameCancel() {
-    this.isChangeExerciseName = false;
-    this.selectedExercise = null
-  }
-
-  onDeleteExerciseClick(exercise) {
-    this.prService.deleteExercise(exercise);
+    this.prService.isChangeExerciseName = false;
+    this.prService.editIndex = null
   }
 
   /**
@@ -80,7 +64,6 @@ export class PersonalRecordsComponent implements OnInit {
    * @param index
    */
   onExerciseClick(index, e) {
-    console.log(e.target);
     if (this.isDesktop) {
       return;
     }
@@ -89,11 +72,11 @@ export class PersonalRecordsComponent implements OnInit {
       return;
     }
     // Toggle
-    if (index === this.selectedExercise) {
-      this.selectedExercise = null;
+    if (index === this.prService.editIndex) {
+      this.prService.editIndex = null;
       return;
     }
-    this.selectedExercise = index;
+    this.prService.editIndex = index;
   }
 
   // Set index for exercise being edited
@@ -105,16 +88,6 @@ export class PersonalRecordsComponent implements OnInit {
   onAddPr(exercise) {
     const modalRef = this.modalService.open(NewPrModalComponent);
     modalRef.componentInstance.exercise = exercise;
-  }
-
-  /**
-   * Get button text to determine sort type
-   * Get exercise from card clicked
-   * @param e
-   * @param exercise
-   */
-  onSortClick(e, exercise) {
-    this.prService.selectSort(e.target.innerText, exercise);
   }
 
   /**
@@ -131,7 +104,7 @@ export class PersonalRecordsComponent implements OnInit {
    */
   checkForDesktop(desktopWidth) {
     if (window.innerWidth < desktopWidth) {
-      this.selectedExercise = 0;
+      this.prService.editIndex = 0;
       this.isDesktop = false;
     } else {
       this.isDesktop = true;
