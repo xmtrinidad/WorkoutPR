@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     // Register User using back-end
     this.authService.registerUser(user).subscribe((data: any) => {
       if (data.success) {
-        this.validateService.validationMessage('You are now registered and can log in', 'danger');
+        this.validateService.validationMessage('You are now registered and can log in', 'success');
         this.router.navigate(['login']);
       } else {
         this.validateService.validationMessage('Something went wrong.  Try registering again.', 'danger');

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { tokenNotExpired } from "angular2-jwt";
+import {User} from "../models/User";
+import {Observable} from "rxjs/Observable";
 
 
 @Injectable()
@@ -30,7 +32,7 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('http://localhost:3000/users/dashboard', {headers: headers});
+    return this.http.get<User>('http://localhost:3000/users/dashboard', {headers: headers});
   }
 
   storeUserData(token, user) {

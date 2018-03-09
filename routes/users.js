@@ -15,7 +15,14 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        muscleGroups: [
+            {name: 'Legs', exercises: []},
+            {name: 'Back', exercises: []},
+            {name: 'Chest', exercises: []},
+            {name: 'Arms', exercises: []},
+            {name: 'Shoulders', exercises: []}
+        ]
     });
 
     User.addUser(newUser, (err) => {
@@ -52,9 +59,8 @@ router.post('/authenticate', (req, res) => {
                     token: `Bearer ${token}`,
                     user: {
                         id: user._id,
-                        name: user.name,
                         username: user.username,
-                        email: user.email
+                        muscleGroups: user.muscleGroups
                     }
                 });
             } else {
@@ -65,7 +71,12 @@ router.post('/authenticate', (req, res) => {
 });
 
 router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({user: req.user});
+    const user = {
+        id: req.user.id,
+        username: req.user.username,
+        muscleGroups: req.user.muscleGroups
+    };
+    res.json({user});
 });
 
 // Export to app.js
