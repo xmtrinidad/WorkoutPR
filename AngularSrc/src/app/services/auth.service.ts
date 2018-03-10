@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { tokenNotExpired } from "angular2-jwt";
 import {User} from "../models/User";
 import {Observable} from "rxjs/Observable";
+import {Exercise} from "../models/Exercise";
 
 
 @Injectable()
@@ -33,6 +34,15 @@ export class AuthService {
       'Authorization': this.authToken
     });
     return this.http.get<User>('http://localhost:3000/users/dashboard', {headers: headers});
+  }
+
+  addUserExercise(exercise: Exercise) {
+    this.loadToken()
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authToken
+    });
+    return this.http.post('http://localhost:3000/users/register', exercise, {headers: headers});
   }
 
   storeUserData(token, user) {

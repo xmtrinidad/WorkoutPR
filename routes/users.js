@@ -79,5 +79,9 @@ router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, r
     res.json({user});
 });
 
+router.post('/add-exercise', passport.authenticate('jwt', {session: false}), (req, res) => {
+    res.json({body: req.body});
+});
+
 // Export to app.js
 module.exports = router;

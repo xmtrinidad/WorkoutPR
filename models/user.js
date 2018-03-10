@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+const PersonalRecordSchema = mongoose.Schema({
+    reps: Number,
+    max: Number
+});
+
+const ExerciseSchema = mongoose.Schema({
+    name: String,
+    prs: [PersonalRecordSchema]
+});
+
+const MuscleGroupSchema = mongoose.Schema({
+    name: String,
+    exercises: [ExerciseSchema]
+});
+
 // User Schema
 const UserSchema = mongoose.Schema({
     name: {
@@ -19,7 +34,7 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     muscleGroups: {
-        type: Array,
+        type: [MuscleGroupSchema],
         required: true
     }
 });
